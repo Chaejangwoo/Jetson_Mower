@@ -1,0 +1,145 @@
+import type { HistoryEntry } from './types';
+
+export const mockHistoryEntries: HistoryEntry[] = [
+  {
+    id: 'hist-20260529-mower-01-am',
+    robotId: 'MOWER-01',
+    startedAt: '2026-05-29T00:10:00.000Z',
+    endedAt: '2026-05-29T01:05:00.000Z',
+    distanceMeters: 684,
+    coveragePercent: 91,
+    route: {
+      type: 'Feature',
+      properties: { robotId: 'MOWER-01', srid: 4326 },
+      geometry: {
+        type: 'LineString',
+        coordinates: [
+          [127.45535, 36.62778],
+          [127.45572, 36.62792],
+          [127.45608, 36.62808],
+          [127.4565, 36.62825],
+          [127.45672, 36.62855],
+          [127.4564, 36.62882],
+          [127.45592, 36.62874],
+          [127.45545, 36.62855],
+        ],
+      },
+    },
+    events: [
+      {
+        id: 'evt-01-start',
+        robotId: 'MOWER-01',
+        occurredAt: '2026-05-29T00:10:00.000Z',
+        severity: 'info',
+        type: 'job-started',
+        message: '자율 예초 작업이 시작되었습니다.',
+      },
+      {
+        id: 'evt-01-obstacle',
+        robotId: 'MOWER-01',
+        occurredAt: '2026-05-29T00:31:00.000Z',
+        severity: 'warning',
+        type: 'obstacle-detected',
+        message: '북쪽 경계 근처에서 장애물이 감지되었습니다.',
+        location: {
+          type: 'Feature',
+          properties: { srid: 4326 },
+          geometry: { type: 'Point', coordinates: [127.45672, 36.62855] },
+        },
+      },
+      {
+        id: 'evt-01-complete',
+        robotId: 'MOWER-01',
+        occurredAt: '2026-05-29T01:05:00.000Z',
+        severity: 'info',
+        type: 'job-completed',
+        message: '커버리지 경로가 완료되었습니다.',
+      },
+    ],
+  },
+  {
+    id: 'hist-20260528-mower-01-pm',
+    robotId: 'MOWER-01',
+    startedAt: '2026-05-28T07:20:00.000Z',
+    endedAt: '2026-05-28T08:02:00.000Z',
+    distanceMeters: 512,
+    coveragePercent: 88,
+    route: {
+      type: 'Feature',
+      properties: { robotId: 'MOWER-01', srid: 4326 },
+      geometry: {
+        type: 'LineString',
+        coordinates: [
+          [127.4552, 36.6287],
+          [127.45555, 36.62855],
+          [127.4559, 36.62835],
+          [127.45625, 36.62815],
+          [127.45665, 36.62802],
+        ],
+      },
+    },
+    events: [
+      {
+        id: 'evt-02-start',
+        robotId: 'MOWER-01',
+        occurredAt: '2026-05-28T07:20:00.000Z',
+        severity: 'info',
+        type: 'job-started',
+        message: '수동 점검 주행이 시작되었습니다.',
+      },
+      {
+        id: 'evt-02-paused',
+        robotId: 'MOWER-01',
+        occurredAt: '2026-05-28T07:44:00.000Z',
+        severity: 'warning',
+        type: 'job-paused',
+        message: '작업자 점검을 위해 작업이 일시 정지되었습니다.',
+      },
+    ],
+  },
+  {
+    id: 'hist-20260529-mower-02-am',
+    robotId: 'MOWER-02',
+    startedAt: '2026-05-29T02:30:00.000Z',
+    endedAt: '2026-05-29T03:08:00.000Z',
+    distanceMeters: 438,
+    coveragePercent: 79,
+    route: {
+      type: 'Feature',
+      properties: { robotId: 'MOWER-02', srid: 4326 },
+      geometry: {
+        type: 'LineString',
+        coordinates: [
+          [127.4549, 36.62748],
+          [127.45522, 36.62762],
+          [127.45558, 36.62778],
+          [127.45592, 36.62798],
+          [127.45575, 36.62818],
+        ],
+      },
+    },
+    events: [
+      {
+        id: 'evt-03-start',
+        robotId: 'MOWER-02',
+        occurredAt: '2026-05-29T02:30:00.000Z',
+        severity: 'info',
+        type: 'job-started',
+        message: '자율 예초 작업이 시작되었습니다.',
+      },
+      {
+        id: 'evt-03-link',
+        robotId: 'MOWER-02',
+        occurredAt: '2026-05-29T02:52:00.000Z',
+        severity: 'critical',
+        type: 'communication-lost',
+        message: '텔레메트리(Telemetry) 공백이 Watchdog 임계값을 초과했습니다.',
+        location: {
+          type: 'Feature',
+          properties: { srid: 4326 },
+          geometry: { type: 'Point', coordinates: [127.45592, 36.62798] },
+        },
+      },
+    ],
+  },
+];
