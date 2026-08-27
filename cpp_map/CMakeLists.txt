@@ -12,6 +12,9 @@ target_compile_options(mower_map PRIVATE -Wall -Wextra -Wpedantic)
 add_executable(mower_map_demo examples/demo.cpp)
 target_link_libraries(mower_map_demo PRIVATE mower_map)
 
+add_executable(mower_coverage_demo examples/coverage_demo.cpp)
+target_link_libraries(mower_coverage_demo PRIVATE mower_map)
+
 enable_testing()
 add_executable(mower_map_test tests/grid_map_test.cpp)
 target_link_libraries(mower_map_test PRIVATE mower_map)

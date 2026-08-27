@@ -27,5 +27,13 @@ int main() {
   const auto cell = map.cellForGps(center);
   assert(cell.has_value() && (*cell == CellIndex{3, 3}));
   assert(!map.cellForGps({36.999, 127.0}).has_value());
+
+  GridMap route_map(20, 20, 0.20, {37.0, 127.0});
+  route_map.setObstacle({9, 9});
+  const auto path = route_map.coveragePath();
+  assert(!path.empty());
+  for (const auto position : path) {
+    assert(route_map.canPlaceMower(position));
+  }
   return 0;
 }

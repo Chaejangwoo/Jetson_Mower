@@ -125,6 +125,41 @@ bool GridMap::placeMower(CellIndex center) {
   return true;
 }
 
+std::vector<CellIndex> GridMap::coveragePath() const {
+  std::vector<CellIndex> path;
+  constexpr int kCenterStep = 2 * kCutRadius + 1;
+  if (rows_ <= 2 * kFootprintRadius || columns_ <= 2 * kFootprintRadius) {
+    return path;
+  }
+
+  bool left_to_right = true;
+  for (int row = kFootprintRadius;
+       row < static_cast<int>(rows_) - kFootprintRadius; row += kCenterStep) {
+    if (left_to_right) {
+      for (int column = kFootprintRadius;
+           column < static_cast<int>(columns_) - kFootprintRadius;
+           column += kCenterStep) {
+        if (canPlaceMower({static_cast<std::size_t>(row),
+                           static_cast<std::size_t>(column)})) {
+          path.push_back({static_cast<std::size_t>(row),
+                          static_cast<std::size_t>(column)});
+        }
+      }
+    } else {
+      for (int column = static_cast<int>(columns_) - kFootprintRadius - 1;
+           column >= kFootprintRadius; column -= kCenterStep) {
+        if (canPlaceMower({static_cast<std::size_t>(row),
+                           static_cast<std::size_t>(column)})) {
+          path.push_back({static_cast<std::size_t>(row),
+                          static_cast<std::size_t>(column)});
+        }
+      }
+    }
+    left_to_right = !left_to_right;
+  }
+  return path;
+}
+
 std::size_t GridMap::offset(CellIndex cell) const {
   if (cell.row >= rows_ || cell.column >= columns_) {
     throw std::out_of_range("cell is outside map");
