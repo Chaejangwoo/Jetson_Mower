@@ -39,8 +39,21 @@ def main():
 
     points = [(left + column * cell + cell // 2,
                top + (99 - row) * cell + cell // 2) for row, column in path]
-    if len(points) > 1:
-        draw.line(points, fill="#2563eb", width=2, joint="curve")
+    # Draw only contiguous sweep segments. This avoids visually drawing a
+    # shortcut through an obstacle when the simple C++ baseline skips a pose.
+    segments = []
+    segment = []
+    for index, point in enumerate(points):
+        if segment and (path[index][0] != path[index - 1][0] or
+                        abs(path[index][1] - path[index - 1][1]) > 3):
+            segments.append(segment)
+            segment = []
+        segment.append(point)
+    if segment:
+        segments.append(segment)
+    for segment in segments:
+        if len(segment) > 1:
+            draw.line(segment, fill="#2563eb", width=2, joint="curve")
     for point in points:
         draw.ellipse((point[0] - 2, point[1] - 2, point[0] + 2, point[1] + 2), fill="#1d4ed8")
 
