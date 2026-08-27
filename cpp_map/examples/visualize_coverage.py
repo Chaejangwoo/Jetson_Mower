@@ -44,8 +44,7 @@ def main():
     segments = []
     segment = []
     for index, point in enumerate(points):
-        if segment and (path[index][0] != path[index - 1][0] or
-                        abs(path[index][1] - path[index - 1][1]) > 3):
+        if segment and abs(path[index][1] - path[index - 1][1]) > 3:
             segments.append(segment)
             segment = []
         segment.append(point)
