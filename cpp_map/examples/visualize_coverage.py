@@ -40,7 +40,7 @@ def main():
     points = [(left + column * cell + cell // 2,
                top + (99 - row) * cell + cell // 2) for row, column in path]
     # Draw only contiguous sweep segments. This avoids visually drawing a
-    # shortcut through an obstacle when the simple C++ baseline skips a pose.
+    # shortcut through an obstacle when the simple CPP baseline skips a pose.
     segments = []
     segment = []
     for index, point in enumerate(points):
@@ -73,7 +73,7 @@ def main():
                   left + current_column * cell + cell // 2 + 4,
                   top + (99 - current_row) * cell + cell // 2 + 4), fill="#111827")
 
-    draw.text((margin, 22), "C++ baseline coverage path | 100 x 100 cells = 20m x 20m", fill="#111827")
+    draw.text((margin, 22), "CPP baseline coverage path | 100 x 100 cells = 20m x 20m", fill="#111827")
     legend_y = 100 * cell + margin + 18
     for x, color, label in [(margin, "#2563eb", f"zigzag path ({len(path)} centers)"),
                              (margin + 220, "#ef4444", "obstacle"),

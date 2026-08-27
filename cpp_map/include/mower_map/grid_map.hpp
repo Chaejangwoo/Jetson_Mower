@@ -51,9 +51,9 @@ class GridMap {
   bool canPlaceMower(CellIndex mower_center) const;
   bool placeMower(CellIndex mower_center);
 
-  // Simple baseline coverage route: centers are spaced by the 3x3 cutter
-  // width and traversed in alternating directions. Obstacle-overlapping
-  // mower positions are skipped.
+  // Simple CPP baseline (lawn-mower/boustrophedon route): centers are spaced
+  // by the 3x3 cutter width and traversed in alternating directions.
+  // Obstacle-overlapping mower positions are skipped.
   std::vector<CellIndex> coveragePath() const;
 
   std::string render() const;
